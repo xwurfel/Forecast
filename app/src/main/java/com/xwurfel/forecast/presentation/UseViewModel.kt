@@ -3,14 +3,19 @@ package com.xwurfel.forecast.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xwurfel.forecast.domain.error_handling.AuthRepository
-import com.xwurfel.forecast.domain.error_handling.DataError
 import com.xwurfel.forecast.domain.error_handling.Result
 import com.xwurfel.forecast.domain.error_handling.UserDataValidator
+import com.xwurfel.forecast.domain.repository.WeatherForecastRepository
+import dagger.Lazy
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UseViewModel(
+@HiltViewModel
+class UseViewModel @Inject constructor(
     val userDataValidator: UserDataValidator,
-    val repository: AuthRepository
+    val authRepository: AuthRepository,
+    private val repository: Lazy<WeatherForecastRepository>
 ): ViewModel() {
 
     fun onRegister(password: String) {
@@ -28,7 +33,7 @@ class UseViewModel(
         }
 
        viewModelScope.launch {
-            when (val result = repository.register(password)){
+            when (val result = authRepository.register(password)){
                 is Result.Error -> {
                         val errorMesagge = result.error.asUiText()
                 }
