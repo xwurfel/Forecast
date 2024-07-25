@@ -43,9 +43,11 @@ android {
     buildFeatures {
         compose = true
     }
-/*    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }*/
+    kotlin {
+        sourceSets.all {
+            languageSettings.enableLanguageFeature("ExplicitBackingFields")
+        }
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -63,15 +65,18 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.foundation.android)
+//    implementation("com.google.android.gms:play-services-location:11.0.2")
 
     //Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.converter.moshi)
+    implementation(libs.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

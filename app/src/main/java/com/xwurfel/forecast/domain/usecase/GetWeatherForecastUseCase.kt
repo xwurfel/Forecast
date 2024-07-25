@@ -1,9 +1,17 @@
 package com.xwurfel.forecast.domain.usecase
 
-import com.xwurfel.forecast.domain.repository.WeatherForecastRepository
+import com.xwurfel.forecast.data.remote.WeatherForecastRetrofitApi
+import com.xwurfel.forecast.domain.model.weather_forecast.WeatherForecast
 import javax.inject.Inject
 
 class GetWeatherForecastUseCase @Inject constructor(
-    private val weatherForecastRepository: WeatherForecastRepository
+    private val weatherForecastRetrofitApi: WeatherForecastRetrofitApi
 ) {
+    suspend operator fun invoke(): WeatherForecast {
+        return weatherForecastRetrofitApi.getWeatherForecast(
+            lat = 49.84,
+            lon = 24.03,
+            appId = "2c824374b2986cee096c43d8777932c7"
+        )
+    }
 }

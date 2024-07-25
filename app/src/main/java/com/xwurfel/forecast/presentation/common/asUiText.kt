@@ -1,4 +1,4 @@
-package com.xwurfel.forecast.presentation.utils
+package com.xwurfel.forecast.presentation.common
 
 import com.xwurfel.forecast.R
 import com.xwurfel.forecast.domain.error_handling.DataError

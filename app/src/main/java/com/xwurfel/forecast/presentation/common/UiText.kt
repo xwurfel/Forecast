@@ -1,4 +1,4 @@
-package com.xwurfel.forecast.presentation.utils
+package com.xwurfel.forecast.presentation.common
 
 import android.content.Context
 import androidx.annotation.StringRes
