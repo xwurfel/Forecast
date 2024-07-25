@@ -22,11 +22,9 @@ object AppModule {
             .build()
     }
 
-
     @Provides
     @Singleton
     fun provideWeatherForecastRetrofitApi(retrofit: Retrofit): WeatherForecastRetrofitApi {
         return retrofit.create(WeatherForecastRetrofitApi::class.java)
     }
 }
-
