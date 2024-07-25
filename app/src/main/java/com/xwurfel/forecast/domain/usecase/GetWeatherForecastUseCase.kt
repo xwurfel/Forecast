@@ -8,6 +8,8 @@ class GetWeatherForecastUseCase @Inject constructor(
     private val weatherForecastRetrofitApi: WeatherForecastRetrofitApi
 ) {
     suspend operator fun invoke(): WeatherForecast {
+        //TODO add real lat and lon
+        //TODO add real lat and lon
         return weatherForecastRetrofitApi.getWeatherForecast(
             lat = 49.84,
             lon = 24.03,
