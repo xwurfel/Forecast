@@ -10,7 +10,6 @@ lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 retrofit = "2.9.0"
-org-jetbrains-kotlin-android = "1.8.0"
 ksp-version = "1.9.22-1.0.17"
 hilt-version = "2.44"
 
