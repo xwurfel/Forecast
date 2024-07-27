@@ -7,10 +7,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xwurfel.forecast.R
@@ -37,7 +38,6 @@ fun ForecastIconBubble(
 ) {
     Column(
         modifier = modifier
-            .padding(vertical = 24.dp)
             .background(color = purpleBubble, RoundedCornerShape(16.dp))
             .border(
                 1.dp,
@@ -50,8 +50,10 @@ fun ForecastIconBubble(
         Spacer(modifier = Modifier.size(2.dp))
         Text(
             title,
-            color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleSmall,
+            maxLines = 1,
+            overflow = TextOverflow.Clip,
+            modifier = Modifier.wrapContentWidth()
         )
         Spacer(modifier = Modifier.size(1.dp))
         Image(
@@ -64,7 +66,6 @@ fun ForecastIconBubble(
         Spacer(modifier = Modifier.size(1.dp))
         Text(
             temperature.toString(),
-            color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleSmall,
         )
         Spacer(modifier = Modifier.size(2.dp))
@@ -77,13 +78,15 @@ private fun PreviewForecastIconBubble() {
     ForecastTheme {
         Surface(
             color = Color.White,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
         ) {
             ForecastIconBubble(
                 title = "Title",
                 icon = R.drawable.ic_raincloud,
                 temperature = 0,
-                modifier = Modifier.wrapContentSize()
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(16.dp)
             )
         }
     }
