@@ -44,7 +44,7 @@ val Typography = Typography(
     titleSmall = TextStyle(
         fontFamily = sfFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 10.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
