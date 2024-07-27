@@ -2,6 +2,7 @@ package com.xwurfel.forecast.presentation.home.view
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,10 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xwurfel.forecast.R
 import com.xwurfel.forecast.ui.theme.ForecastTheme
+import com.xwurfel.forecast.ui.theme.purplebl
+import com.xwurfel.forecast.ui.theme.whitebl
 
 @Composable
 fun ForecastIconBubble(
-    title: String,
+    title : String,
     @DrawableRes icon: Int,
     temperature: Int,
     modifier: Modifier = Modifier,
@@ -34,21 +37,39 @@ fun ForecastIconBubble(
     Column(
         modifier = modifier
             .padding(vertical = 24.dp)
+            .background(color = purplebl, RoundedCornerShape(16.dp))
             .border(
                 1.dp,
-                color = MaterialTheme.colorScheme.onBackground,
+                color = whitebl,
                 shape = RoundedCornerShape(16.dp)
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        Text(title, color = MaterialTheme.colorScheme.onBackground)
+        Text(
+            title,
+            color = MaterialTheme.colorScheme.onBackground,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier
+                .padding(top = 6.dp)
+                .padding(all = 2.dp)
+        )
         Image(
             painter = painterResource(id = icon),
             contentDescription = null,
-            modifier = Modifier.size(48.dp)
+            modifier = Modifier
+                .size(32.dp)
+                .padding(start = 4.dp)
+                .padding(end = 4.dp)
         )
-        Text(temperature.toString(), color = MaterialTheme.colorScheme.onBackground)
+        Text(
+            temperature.toString(),
+            color = MaterialTheme.colorScheme.onBackground,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier
+                .padding(bottom = 6.dp)
+                .padding(all = 2.dp)
+        )
     }
 }
 
