@@ -85,14 +85,11 @@ fun ForecastIconWeatherDetails(
     modifier: Modifier = Modifier,
     isActive: Boolean = false
 ) {
-    Column(
-        modifier = Modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box(
-            modifier = modifier
-                .border(width = 1.dp, color = BorderPurple,
+    Box(modifier = modifier) {
+        Column(
+            modifier = Modifier
+                .border(
+                    width = 1.dp, color = BorderPurple,
                     shape = RoundedCornerShape(30.dp)
                 )
                 .size(140.dp)
