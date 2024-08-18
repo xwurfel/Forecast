@@ -15,6 +15,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Text
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -24,25 +25,34 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.xwurfel.forecast.data.local.Coordinates
+import com.xwurfel.forecast.domain.usecase.GetCoordinatesFromDatabase
+import com.xwurfel.forecast.domain.usecase.SaveCoordinatesToDatabaseUseCase
 import com.xwurfel.forecast.presentation.home.view.HomeScreen
 import com.xwurfel.forecast.presentation.navigation.Screens
 import com.xwurfel.forecast.ui.theme.ForecastTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
 
-    companion object {
-        const val PERMISSION_ID = 44
-    }
+    @Inject
+    lateinit var saveCoordinatesToDatabaseUseCase: SaveCoordinatesToDatabaseUseCase
+
+    @Inject
+    lateinit var getCoordinatesFromDatabase: GetCoordinatesFromDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(this@MainActivity)
         requestPermissions()
-        enableEdgeToEdge()
+
         setContent {
             ForecastTheme {
                 val navController = rememberNavController()
@@ -70,6 +80,14 @@ class MainActivity : ComponentActivity() {
                     if (location == null) {
                         requestNewLocationData()
                     } else {
+                        val coordinates = Coordinates(
+                            latitude = location.latitude,
+                            longitude = location.longitude
+                        )
+
+                        lifecycleScope.launch {
+                            saveCoordinatesToDatabaseUseCase(coordinates)
+                        }
 //                        latitudeTextView.text = location.latitude.toString()
 //                        longitTextView.text = location.longitude.toString()
                     }
@@ -103,6 +121,19 @@ class MainActivity : ComponentActivity() {
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val mLastLocation = locationResult.lastLocation
+
+            val coordinates = mLastLocation?.let {
+                Coordinates(
+                    latitude = it.latitude,
+                    longitude = it.longitude
+                )
+            }
+
+            coordinates?.let {
+                lifecycleScope.launch {
+                    saveCoordinatesToDatabaseUseCase(it)
+                }
+            }
 //            latitudeTextView.text = "Latitude: ${mLastLocation.latitude}"
 //            longitTextView.text = "Longitude: ${mLastLocation.longitude}"
         }
@@ -157,5 +188,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    companion object {
+        const val PERMISSION_ID = 44
+    }
 }
 
