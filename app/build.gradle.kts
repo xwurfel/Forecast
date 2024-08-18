@@ -66,7 +66,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.foundation.android)
-//    implementation("com.google.android.gms:play-services-location:11.0.2")
 
     //Hilt
     implementation(libs.hilt.android)
@@ -86,4 +85,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //FusedLocationProvider
+    implementation(libs.play.services.location)
 }
