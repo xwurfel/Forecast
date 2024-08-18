@@ -78,6 +78,14 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation (libs.androidx.room.paging)
+    ksp (libs.androidx.room.compiler)
+
+    //FusedLocationProvider
+    implementation(libs.play.services.location)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -85,7 +93,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    //FusedLocationProvider
-    implementation(libs.play.services.location)
 }
