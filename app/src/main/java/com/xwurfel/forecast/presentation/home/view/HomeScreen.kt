@@ -1,8 +1,6 @@
 package com.xwurfel.forecast.presentation.home.view
 
-import android.content.Context
 import android.content.Intent
-import com.xwurfel.forecast.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.xwurfel.forecast.LocationService
+import com.xwurfel.forecast.R
 import com.xwurfel.forecast.domain.model.weather_forecast.WeatherForecast
 import com.xwurfel.forecast.presentation.common.CircularLoadingIndicator
 import com.xwurfel.forecast.presentation.common.GenericErrorScreen
