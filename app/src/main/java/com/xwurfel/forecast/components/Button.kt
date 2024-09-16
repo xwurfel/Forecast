@@ -38,7 +38,7 @@ fun RoundPlusButton(modifier: Modifier = Modifier) {
             ) {
                 OutlinedButton(
                     onClick = { /*TODO*/ },
-                    border = BorderStroke(2.dp, color = BorderPurple),
+                    border = BorderStroke(5.dp, color = BorderPurple),
                     shape = CircleShape,
                     modifier = Modifier
                         .size(200.dp)
